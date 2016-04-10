@@ -1,0 +1,56 @@
+package entidades;
+
+public class Pessoa {
+
+	private int id_pes;
+	private String nome;
+	private String sobrenome;
+
+	public int getId_pes() {
+		return id_pes;
+	}
+
+	public void setId_pes(int id_pes) {
+		this.id_pes = id_pes;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public Pessoa() {
+
+	}
+
+	/**
+	 * @param id_pes
+	 * @param nome
+	 * @param sobrenome
+	 */
+	public Pessoa(int id_pes, String nome, String sobrenome) {
+		super();
+		this.id_pes = id_pes;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+	}
+
+	@Override
+	public String toString() {
+		return "Pessoa [id_pes=" + id_pes + ", nome=" + nome + ", sobrenome=" + sobrenome + "]";
+	}
+	
+	
+
+}

@@ -1,0 +1,19 @@
+/**
+ * 
+ */
+package conexao;
+
+/**
+ * @author Elima
+ *
+ */
+public class Conexao {
+
+	/**
+	 * 
+	 */
+	public Conexao() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package interfaces;
+
+import java.util.List;
+
+/**
+ * @author Elima
+ *
+ */
+public interface Obrigatorio<QualquerEntidade> {
+
+	public boolean create(QualquerEntidade ent);
+
+	public boolean delete(Object key);
+
+	public boolean update(QualquerEntidade ent);
+
+	public QualquerEntidade select(Object key);
+
+	public List<QualquerEntidade> selectAll();
+
+}

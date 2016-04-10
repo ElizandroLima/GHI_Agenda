@@ -1,0 +1,24 @@
+/**
+ * 
+ */
+package conexao;
+
+import java.sql.Connection;
+
+/**
+ * @author Elima
+ *
+ */
+public class Conexao {
+	
+	public static Conexao instance; //Singleton
+	private Connection con;
+	
+
+	/**
+	 * 
+	 */
+	public Conexao() {
+	}
+
+}

@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package interfaces;
+
+/**
+ * @author Elima
+ *
+ */
+public interface Obrigatorio {
+
+}

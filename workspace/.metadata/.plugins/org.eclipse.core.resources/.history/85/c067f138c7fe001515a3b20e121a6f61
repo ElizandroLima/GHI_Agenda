@@ -1,0 +1,28 @@
+/**
+ * 
+ */
+package conexao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+/**
+ * @author Elima
+ *
+ */
+public class Conexao {
+	
+	public static Conexao instance; //Singleton
+	private Connection con;
+	
+
+	/**
+	 * 
+	 */
+	public Conexao() {
+		Class.forName("");//driver
+		con = DriverManager.getConnection(null, "root", "root");
+		
+	}
+
+}

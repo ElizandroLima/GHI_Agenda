@@ -1,0 +1,35 @@
+/**
+ * 
+ */
+package conexao;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+/**
+ * @author Elima
+ *
+ */
+public class Conexao {
+	
+	public static Conexao instance; //Singleton
+	private Connection con;
+
+	/**
+	 * 
+	 */
+	public Conexao() {
+		String url = "jdbc:mysql://localhost:3306/bdloteria"; 
+		String driver = "com.mysql.jdbc.Driver";
+		String usuario = "root"; 
+		String senha = "root"; 
+		
+		
+		Class.forName(driver); //driver
+		Connection con; 
+		con = DriverManager.getConnection(url,usuario,senha); //url
+		
+		
+	}
+
+}

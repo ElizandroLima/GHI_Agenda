@@ -1,0 +1,233 @@
+package calculos;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.DefaultListModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.border.EmptyBorder;
+
+public class Calculador extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField input_fib;
+	private JTextField input_soma;
+	private JTextField input_media;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Calculador frame = new Calculador();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Calculador() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 300, 200);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 11, 264, 139);
+		contentPane.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		panel.add(tabbedPane);
+
+		// **Painel 1 - Fibonati**/
+		JPanel panel_1 = new JPanel();
+		tabbedPane.addTab(" Fibonati", null, panel_1, null);
+
+		JLabel lb_fib = new JLabel("Numero: ");
+
+		input_fib = new JTextField();
+		input_fib.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent arg0) {
+
+				String input = input_fib.getText();
+				lb_fib.setText(input);
+
+			}
+		});
+		input_fib.setColumns(10);
+
+		JLabel rs_fib = new JLabel("resultado");
+
+		JButton bt_fib = new JButton("calcular");
+		bt_fib.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String input = input_fib.getText();
+
+				int fat = 1;
+
+				// converte o valor de texto para um intgeiro
+				int valor = Integer.parseInt(input);
+
+				for (int i = 2; i <= valor; i++) {
+					fat *= i;
+				}
+
+				rs_fib.setText("O fatorial de " + valor + " é igual a " + fat);
+
+			}
+		});
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup().addGap(10)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup().addComponent(lb_fib).addGap(10)
+										.addComponent(input_fib, GroupLayout.PREFERRED_SIZE, 44,
+												GroupLayout.PREFERRED_SIZE)
+										.addGap(18).addComponent(bt_fib))
+								.addComponent(rs_fib))));
+		gl_panel_1.setVerticalGroup(gl_panel_1.createParallelGroup(Alignment.LEADING).addGroup(gl_panel_1
+				.createSequentialGroup().addGap(34)
+				.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createSequentialGroup().addGap(4).addComponent(lb_fib))
+						.addGroup(gl_panel_1.createSequentialGroup().addGap(1).addComponent(input_fib,
+								GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(bt_fib))
+				.addGap(18).addComponent(rs_fib)));
+		panel_1.setLayout(gl_panel_1);
+
+		// **Painel 2 - soma**/
+		JPanel panel_2 = new JPanel();
+		tabbedPane.addTab("Soma", null, panel_2, null);
+
+		JLabel lb_soma = new JLabel("valores: ");
+
+		input_soma = new JTextField();
+		input_soma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String input2 = input_soma.getText();
+				lb_soma.setText(input2);
+
+			}
+		});
+		input_soma.setColumns(10);
+
+		JLabel lb_adic_som = new JLabel("Adicionados");
+		JLabel rs_soma = new JLabel("soma...");
+
+		JButton bt_soma = new JButton("adicionar");
+		bt_soma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				String input2 = input_soma.getText();
+				int input_convert = Integer.parseInt(input2);
+
+				int[] numero = new int[50];
+				
+				int soma=0;
+				
+				lb_adic_som.setText("Digitou " + input2);
+					
+				for(int cont=0 ; cont< numero.length ; cont++){
+	                System.out.print("Entre com o número "+(cont+1)+": ");
+	                numero[cont]= input_convert;
+	            }
+	            
+	            //exibindo e somando
+	            for(int cont : numero){
+	                soma += cont;
+	            }
+	            
+	            System.out.println("A soma dos números que você digitou é "+soma);
+				
+
+					rs_soma.setText("Soma: " + soma);
+
+				
+
+				
+
+			}
+		});
+
+		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
+		gl_panel_2
+				.setHorizontalGroup(
+						gl_panel_2.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_2.createSequentialGroup().addContainerGap().addGroup(gl_panel_2
+										.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_2.createSequentialGroup().addGroup(gl_panel_2
+												.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_panel_2.createSequentialGroup().addComponent(lb_soma)
+														.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(
+																input_soma, GroupLayout.PREFERRED_SIZE, 47,
+																GroupLayout.PREFERRED_SIZE))
+												.addComponent(lb_adic_som)).addGap(19).addComponent(bt_soma))
+										.addComponent(rs_soma)).addContainerGap(56, Short.MAX_VALUE)));
+		gl_panel_2.setVerticalGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_2.createSequentialGroup().addContainerGap()
+						.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE).addComponent(bt_soma)
+								.addComponent(lb_soma).addComponent(input_soma, GroupLayout.PREFERRED_SIZE,
+										GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addGap(18).addComponent(lb_adic_som).addPreferredGap(ComponentPlacement.UNRELATED)
+						.addComponent(rs_soma).addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
+		panel_2.setLayout(gl_panel_2);
+
+		JPanel panel_3 = new JPanel();
+		tabbedPane.addTab("M\u00E9dia", null, panel_3, null);
+
+		JLabel lb_media = new JLabel("Numeros: ");
+
+		input_media = new JTextField();
+		input_media.setColumns(10);
+
+		JButton bt_media = new JButton("adicionar");
+		JLabel rs_media = new JLabel("medias");
+		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		gl_panel_3.setHorizontalGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup().addContainerGap()
+						.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_3.createSequentialGroup().addComponent(lb_media)
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addComponent(input_media, GroupLayout.PREFERRED_SIZE, 50,
+												GroupLayout.PREFERRED_SIZE)
+										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(bt_media))
+								.addComponent(rs_media))
+						.addContainerGap(55, Short.MAX_VALUE)));
+		gl_panel_3.setVerticalGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup().addGap(23)
+						.addGroup(gl_panel_3.createParallelGroup(Alignment.BASELINE).addComponent(lb_media)
+								.addComponent(input_media, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(bt_media))
+						.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE).addComponent(rs_media)
+						.addGap(21)));
+		panel_3.setLayout(gl_panel_3);
+	}
+}

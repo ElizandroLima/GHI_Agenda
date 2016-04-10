@@ -1,0 +1,67 @@
+package prog_III;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JTabbedPane;
+import java.awt.Color;
+import javax.swing.JLabel;
+
+public class Caculador extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Caculador frame = new Caculador();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Caculador() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 400, 300);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel_top = new JPanel();
+		panel_top.setBounds(10, 11, 365, 146);
+		contentPane.add(panel_top);
+		panel_top.setLayout(null);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 5, 345, 130);
+		panel_top.add(tabbedPane);
+		
+		JTabbedPane tabbedPane_1 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Fatorial", null, tabbedPane_1, null);
+		
+		JTabbedPane tabbedPane_2 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("Soma", null, tabbedPane_2, null);
+		
+		JTabbedPane tabbedPane_3 = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.addTab("M\u00E9dia", null, tabbedPane_3, null);
+		
+		JPanel panel_botton = new JPanel();
+		panel_botton.setBounds(10, 167, 365, 83);
+		contentPane.add(panel_botton);
+	}
+
+}

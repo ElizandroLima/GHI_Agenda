@@ -1,0 +1,47 @@
+/**
+ * 
+ */
+package dao;
+
+import java.util.List;
+
+import entidades.Pessoa;
+import interfaces.Obrigatorio;
+
+/**
+ * @author Elima
+ *
+ */
+public class AgendaDAO implements Obrigatorio<Pessoa> {
+
+	@Override
+	public boolean create(Pessoa ent) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean delete(Object key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean update(Pessoa ent) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Pessoa select(Object key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pessoa> selectAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
