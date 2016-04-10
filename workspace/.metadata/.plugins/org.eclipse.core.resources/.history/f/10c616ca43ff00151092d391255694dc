@@ -23,7 +23,7 @@ public class Conexao {
 	 * construtor da classe que gera conexao
 	 */
 	private Conexao() {
-		String url = "jdbc:mysql://localhost:3306/sisfac";
+		String url = "jdbc:mysql://localhost:3306/bdloteria";
 		String driver = "com.mysql.jdbc.Driver";
 		String usuario = "root";
 		String senha = "root";
