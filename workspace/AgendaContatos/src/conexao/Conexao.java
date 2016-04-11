@@ -67,7 +67,6 @@ public class Conexao {
 			instance = new Conexao();
 		}
 		return instance;
-			
 	}
 	
 	public Connection getCon() {

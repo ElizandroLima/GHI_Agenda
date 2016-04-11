@@ -11,4 +11,8 @@
 <fullyQualifiedTypeName name="controle.ControlePessoa"/>
 <fullyQualifiedTypeName name="javax.swing.JTable"/>
 <fullyQualifiedTypeName name="javax.swing.JScrollPane"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
+<fullyQualifiedTypeName name="java.sql.SQLException"/>
+<fullyQualifiedTypeName name="conexao.DaoHelper"/>
+<fullyQualifiedTypeName name="entidades.Pessoa"/>
 </qualifiedTypeNameHistroy>

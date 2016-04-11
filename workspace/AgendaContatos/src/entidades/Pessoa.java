@@ -6,66 +6,56 @@ public class Pessoa {
 	private String nome;
 	private String sobrenome;
 	private String sexo;
-
-	private Endereco endereco;
-	private Contato contato;
+	private String telefone;
+	private String email;
+	private String rua;
+	private int numero;
+	private String complemento;
+	private String cep;
+	private String cidade;
+	private String estado;
+	private String pais;
 
 	public Pessoa() {
 
 	}
 
-	/**
-	 * @param id_pes
-	 * @param nome
-	 * @param sobrenome
-	 * @param sexo
-	 * @param endereco
-	 * @param contato
-	 */
-	public Pessoa(int id_pes, String nome, String sobrenome, String sexo, Endereco endereco, Contato contato) {
-		super();
-		this.id_pes = id_pes;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.sexo = sexo;
-		this.endereco = endereco;
-		this.contato = contato;
-	}
-
-	/**
-	 * @param id_pes
-	 * @param nome
-	 * @param sobrenome
-	 * @param sexo
-	 */
-	public Pessoa(int id_pes, String nome, String sobrenome, String sexo) {
-		super();
-		this.id_pes = id_pes;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.sexo = sexo;
-	}
 
 	/**
 	 * @param nome
 	 * @param sobrenome
 	 * @param sexo
+	 * @param telefone
+	 * @param email
+	 * @param rua
+	 * @param numero
+	 * @param complemento
+	 * @param cep
+	 * @param cidade
+	 * @param estado
+	 * @param pais
 	 */
-	public Pessoa(String nome, String sobrenome, String sexo) {
+	public Pessoa(String nome, String sobrenome, String sexo, String telefone, String email, String rua,
+			int numero, String complemento, String cep, String cidade, String estado, String pais) {
 		super();
+		
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.sexo = sexo;
+		this.telefone = telefone;
+		this.email = email;
+		this.rua = rua;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.cep = cep;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.pais = pais;
 	}
 	
+	
 
-	/**
-	 * @param id_pes
-	 */
-	public Pessoa(int id_pes) {
-		super();
-		this.id_pes = id_pes;
-	}
+
 
 	/**
 	 * @return the id_pes
@@ -128,33 +118,174 @@ public class Pessoa {
 	}
 
 	/**
-	 * @return the endereco
+	 * @return the rua
 	 */
-	public Endereco getEndereco() {
-		return endereco;
+	public String getRua() {
+		return rua;
 	}
 
 	/**
-	 * @param endereco
-	 *            the endereco to set
+	 * @param rua
+	 *            the rua to set
 	 */
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setRua(String rua) {
+		this.rua = rua;
 	}
 
 	/**
-	 * @return the contato
+	 * @return the numero
 	 */
-	public Contato getContato() {
-		return contato;
+	public int getNumero() {
+		return numero;
 	}
 
 	/**
-	 * @param contato
-	 *            the contato to set
+	 * @param numero
+	 *            the numero to set
 	 */
-	public void setContato(Contato contato) {
-		this.contato = contato;
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+
+	/**
+	 * @return the complemento
+	 */
+	public String getComplemento() {
+		return complemento;
+	}
+
+	/**
+	 * @param complemento
+	 *            the complemento to set
+	 */
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
+
+	/**
+	 * @return the cep
+	 */
+	public String getCep() {
+		return cep;
+	}
+
+	/**
+	 * @param cep
+	 *            the cep to set
+	 */
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	/**
+	 * @return the cidade
+	 */
+	public String getCidade() {
+		return cidade;
+	}
+
+	/**
+	 * @param cidade
+	 *            the cidade to set
+	 */
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	/**
+	 * @return the estado
+	 */
+	public String getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado
+	 *            the estado to set
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	/**
+	 * @return the pais
+	 */
+	public String getPais() {
+		return pais;
+	}
+
+	/**
+	 * @param pais
+	 *            the pais to set
+	 */
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	/**
+	 * @return the telefone
+	 */
+	public String getTelefone() {
+		return telefone;
+	}
+
+	/**
+	 * @param telefone
+	 *            the telefone to set
+	 */
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email
+	 *            the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Pessoa [nome=");
+		builder.append(nome);
+		builder.append(", sobrenome=");
+		builder.append(sobrenome);
+		builder.append(", sexo=");
+		builder.append(sexo);
+		builder.append(", rua=");
+		builder.append(rua);
+		builder.append(", numero=");
+		builder.append(numero);
+		builder.append(", complemento=");
+		builder.append(complemento);
+		builder.append(", cep=");
+		builder.append(cep);
+		builder.append(", cidade=");
+		builder.append(cidade);
+		builder.append(", estado=");
+		builder.append(estado);
+		builder.append(", pais=");
+		builder.append(pais);
+		builder.append(", telefone=");
+		builder.append(telefone);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append("]");
+		return builder.toString();
 	}
 
 	/*
@@ -166,10 +297,19 @@ public class Pessoa {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
+		result = prime * result + ((cidade == null) ? 0 : cidade.hashCode());
+		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((estado == null) ? 0 : estado.hashCode());
 		result = prime * result + id_pes;
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + numero;
+		result = prime * result + ((pais == null) ? 0 : pais.hashCode());
+		result = prime * result + ((rua == null) ? 0 : rua.hashCode());
 		result = prime * result + ((sexo == null) ? 0 : sexo.hashCode());
 		result = prime * result + ((sobrenome == null) ? 0 : sobrenome.hashCode());
+		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
 
@@ -187,12 +327,49 @@ public class Pessoa {
 		if (getClass() != obj.getClass())
 			return false;
 		Pessoa other = (Pessoa) obj;
+		if (cep == null) {
+			if (other.cep != null)
+				return false;
+		} else if (!cep.equals(other.cep))
+			return false;
+		if (cidade == null) {
+			if (other.cidade != null)
+				return false;
+		} else if (!cidade.equals(other.cidade))
+			return false;
+		if (complemento == null) {
+			if (other.complemento != null)
+				return false;
+		} else if (!complemento.equals(other.complemento))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (estado == null) {
+			if (other.estado != null)
+				return false;
+		} else if (!estado.equals(other.estado))
+			return false;
 		if (id_pes != other.id_pes)
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
+			return false;
+		if (numero != other.numero)
+			return false;
+		if (pais == null) {
+			if (other.pais != null)
+				return false;
+		} else if (!pais.equals(other.pais))
+			return false;
+		if (rua == null) {
+			if (other.rua != null)
+				return false;
+		} else if (!rua.equals(other.rua))
 			return false;
 		if (sexo == null) {
 			if (other.sexo != null)
@@ -204,31 +381,12 @@ public class Pessoa {
 				return false;
 		} else if (!sobrenome.equals(other.sobrenome))
 			return false;
+		if (telefone == null) {
+			if (other.telefone != null)
+				return false;
+		} else if (!telefone.equals(other.telefone))
+			return false;
 		return true;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Pessoa [id_pes=");
-		builder.append(id_pes);
-		builder.append(", nome=");
-		builder.append(nome);
-		builder.append(", sobrenome=");
-		builder.append(sobrenome);
-		builder.append(", sexo=");
-		builder.append(sexo);
-		builder.append(", endereco=");
-		builder.append(endereco);
-		builder.append(", contato=");
-		builder.append(contato);
-		builder.append("]");
-		return builder.toString();
 	}
 
 }
