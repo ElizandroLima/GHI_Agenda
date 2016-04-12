@@ -1,0 +1,146 @@
+package view;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+
+public class FrameAgenda extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField jtf_name;
+	private JTextField textField;
+	private JTextField jtf_telefone;
+	private JTextField jtf_email;
+	private JTextField tf_locationImage;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrameAgenda frame = new FrameAgenda();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+
+	/**
+	 * Create the frame.
+	 */
+	public FrameAgenda() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 803, 492);
+		
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lbl_nome = new JLabel("Nome");
+		lbl_nome.setBounds(150, 27, 46, 14);
+		contentPane.add(lbl_nome);
+		
+		jtf_name = new JTextField();
+		jtf_name.setBounds(150, 41, 184, 20);
+		contentPane.add(jtf_name);
+		jtf_name.setColumns(10);
+		
+		JLabel lbl_sobrenome = new JLabel("Sobrenome");
+		lbl_sobrenome.setBounds(349, 27, 77, 14);
+		contentPane.add(lbl_sobrenome);
+		
+		textField = new JTextField();
+		textField.setBounds(347, 41, 229, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		
+		JLabel lblTelefone = new JLabel("Telefone");
+		lblTelefone.setBounds(150, 72, 46, 14);
+		contentPane.add(lblTelefone);
+		
+		jtf_telefone = new JTextField();
+		jtf_telefone.setBounds(150, 97, 123, 20);
+		contentPane.add(jtf_telefone);
+		jtf_telefone.setColumns(10);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(288, 72, 46, 14);
+		contentPane.add(lblEmail);
+		
+		jtf_email = new JTextField();
+		jtf_email.setBounds(286, 97, 290, 20);
+		contentPane.add(jtf_email);
+		jtf_email.setColumns(10);
+	
+		JLabel lbl_mostraImagem = new JLabel("foto");
+		lbl_mostraImagem.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl_mostraImagem.setBounds(10, 27, 114, 132);
+		contentPane.add(lbl_mostraImagem);
+		
+		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.setBounds(688, 419, 89, 23);
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		contentPane.add(btnSalvar);
+		
+		tf_locationImage = new JTextField();
+		tf_locationImage.setBounds(10, 230, 566, 20);
+		contentPane.add(tf_locationImage);
+		tf_locationImage.setColumns(10);
+		
+		JButton btnCarregarImagem = new JButton("Carregar foto");
+		btnCarregarImagem.setBounds(10, 196, 114, 23);
+		btnCarregarImagem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser arquivo = new JFileChooser();
+				arquivo.setDialogTitle("Selecione uma imagem!");
+				arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+				int opcao = arquivo.showOpenDialog(arquivo);
+
+				if (opcao == JFileChooser.APPROVE_OPTION) {
+					File file = new File("Caminho");
+					file = arquivo.getSelectedFile();
+
+					String filename = file.getAbsolutePath();
+					tf_locationImage.setText(filename);
+
+					ImageIcon imagem = new ImageIcon(arquivo.getSelectedFile()
+							.getPath());
+					lbl_mostraImagem.setIcon(new ImageIcon(imagem.getImage()
+							.getScaledInstance(lbl_mostraImagem.getWidth(),
+									lbl_mostraImagem.getHeight(), Image.SCALE_DEFAULT)));
+
+				}
+			}
+		});
+		contentPane.add(btnCarregarImagem);
+		
+		
+	}
+}

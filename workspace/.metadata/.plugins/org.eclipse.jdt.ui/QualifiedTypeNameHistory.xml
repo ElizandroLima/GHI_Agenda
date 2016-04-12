@@ -14,5 +14,6 @@
 <fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="conexao.DaoHelper"/>
+<fullyQualifiedTypeName name="conexao.Conexao"/>
 <fullyQualifiedTypeName name="entidades.Pessoa"/>
 </qualifiedTypeNameHistroy>

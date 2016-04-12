@@ -55,9 +55,9 @@ public class CarregarImagem extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(258, 11, 146, 173);
-		panel.add(lblNewLabel);
+		JLabel lbl_mostraImagem = new JLabel("New label");
+		lbl_mostraImagem.setBounds(258, 11, 146, 173);
+		panel.add(lbl_mostraImagem);
 
 		JButton bt_addImage = new JButton("adicionar");
 		bt_addImage.addActionListener(new ActionListener() {
@@ -78,9 +78,9 @@ public class CarregarImagem extends JFrame {
 
 					ImageIcon imagem = new ImageIcon(arquivo.getSelectedFile()
 							.getPath());
-					lblNewLabel.setIcon(new ImageIcon(imagem.getImage()
-							.getScaledInstance(lblNewLabel.getWidth(),
-									lblNewLabel.getHeight(), Image.SCALE_DEFAULT)));
+					lbl_mostraImagem.setIcon(new ImageIcon(imagem.getImage()
+							.getScaledInstance(lbl_mostraImagem.getWidth(),
+									lbl_mostraImagem.getHeight(), Image.SCALE_DEFAULT)));
 
 				}
 

@@ -1,0 +1,148 @@
+package view;
+
+import java.awt.EventQueue;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JButton;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
+import java.awt.Component;
+
+public class FrameAgendaContatos extends JFrame {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField textField_nome;
+	private JTextField textField_Sobrenome;
+	private JTextField textField_Sexo;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrameAgendaContatos frame = new FrameAgendaContatos();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public FrameAgendaContatos() {
+		setTitle("Agenda de Contatos");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 650, 434);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 11, 614, 373);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lbImagem = new JLabel("foto");
+		lbImagem.setHorizontalAlignment(SwingConstants.CENTER);
+		lbImagem.setBounds(10, 28, 101, 128);
+		panel.add(lbImagem);
+		
+		JLabel lblNome = new JLabel("Nome");
+		lblNome.setBounds(121, 11, 46, 14);
+		panel.add(lblNome);
+		
+		textField_nome = new JTextField();
+		textField_nome.setBounds(121, 28, 137, 20);
+		panel.add(textField_nome);
+		textField_nome.setColumns(10);
+		
+		JLabel lblSobrenome = new JLabel("Sobrenome");
+		lblSobrenome.setBounds(273, 11, 66, 14);
+		panel.add(lblSobrenome);
+		
+		textField_Sobrenome = new JTextField();
+		textField_Sobrenome.setBounds(268, 28, 313, 20);
+		panel.add(textField_Sobrenome);
+		textField_Sobrenome.setColumns(10);
+		
+		JLabel lblSexo = new JLabel("Sexo");
+		lblSexo.setBounds(121, 59, 46, 14);
+		panel.add(lblSexo);
+		
+		textField_Sexo = new JTextField();
+		textField_Sexo.setBounds(121, 82, 86, 20);
+		panel.add(textField_Sexo);
+		textField_Sexo.setColumns(10);
+		
+		JButton btnCarregarImagem = new JButton("Carregar Imagem");
+		btnCarregarImagem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				JFileChooser arquivo = new JFileChooser();
+				arquivo.setDialogTitle("Selecione uma imagem!");
+				arquivo.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+				int opcao = arquivo.showOpenDialog(arquivo);
+
+				if (opcao == JFileChooser.APPROVE_OPTION) {
+					File file = new File("Caminho");
+					file = arquivo.getSelectedFile();
+
+					String filename = file.getAbsolutePath();
+					lbImagem.setText(filename);
+
+					ImageIcon imagem = new ImageIcon(arquivo.getSelectedFile()
+							.getPath());
+					lbImagem.setIcon(new ImageIcon(imagem.getImage()
+							.getScaledInstance(lbImagem.getWidth(),
+									lbImagem.getHeight(), Image.SCALE_DEFAULT)));
+
+				}
+
+				
+			}
+		});
+		btnCarregarImagem.setBounds(10, 164, 117, 23);
+		panel.add(btnCarregarImagem);
+		
+		JButton btnSair = new JButton("Sair");
+		btnSair.setBounds(515, 339, 89, 23);
+		panel.add(btnSair);
+		
+		JLabel lblEmail = new JLabel("Email");
+		lblEmail.setBounds(226, 59, 46, 14);
+		panel.add(lblEmail);
+		
+		JLabel lbltelefone = new JLabel("Telefone");
+		lbltelefone.setBounds(121, 113, 46, 14);
+		panel.add(lbltelefone);
+		
+		textField = new JTextField();
+		textField.setBounds(213, 77, 200, 50);
+		panel.add(textField);
+		textField.setColumns(10);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, panel, lbImagem, lblNome, textField_nome, lblSobrenome, textField_Sobrenome, lblSexo, textField_Sexo, btnCarregarImagem, btnSair}));
+	}
+}
