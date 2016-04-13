@@ -27,7 +27,7 @@ public enum EstadoType {
 	SC ("Santa Catarina"),
 	SP ("São Paulo"),
 	SE ("Sergipe"),
-	Tocantins ("Tocantins");
+	TO ("Tocantins");
 
 	private String descEstado;
 	

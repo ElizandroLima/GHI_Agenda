@@ -7,9 +7,10 @@ import java.awt.Image;
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
-import java.sql.PreparedStatement;
-import java.util.ArrayList;
+import java.text.ParseException;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
@@ -18,8 +19,10 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,10 +30,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
-import conexao.Conexao;
 import dao.PessoaDAO;
 import entidades.EstadoType;
 import entidades.Pessoa;
@@ -46,11 +49,11 @@ public class FrameAgendaContatos extends JFrame {
 	private JTextField textField_nome;
 	private JTextField textField_Sobrenome;
 	private JTextField textField_email;
-	private JTextField textField_telefone;
+	private JFormattedTextField textField_telefone;
 	private JTextField textField_rua;
 	private JTextField textField_numero;
 	private JTextField textField_complemento;
-	private JTextField textField_cep;
+	private JFormattedTextField textField_cep;
 	private JTextField textField_cidade;
 	private JTextField textField_pais;
 	private JComboBox<SexoType> comboBox_sexo;
@@ -101,6 +104,15 @@ public class FrameAgendaContatos extends JFrame {
 		panel.add(lblNome);
 		
 		textField_nome = new JTextField();
+		textField_nome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent ev) {
+				String caracteres = "0987654321";
+				if(caracteres.contains(ev.getKeyChar()+"")){
+					ev.consume();
+				}
+			}
+		});
 		textField_nome.setBounds(121, 28, 281, 20);
 		panel.add(textField_nome);
 		textField_nome.setColumns(10);
@@ -110,6 +122,16 @@ public class FrameAgendaContatos extends JFrame {
 		panel.add(lblSobrenome);
 		
 		textField_Sobrenome = new JTextField();
+		textField_Sobrenome.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent ev) {
+				String caracteres = "0987654321";
+				if(caracteres.contains(ev.getKeyChar()+"")){
+					ev.consume();
+				}
+				
+			}
+		});
 		textField_Sobrenome.setBounds(412, 28, 348, 20);
 		panel.add(textField_Sobrenome);
 		textField_Sobrenome.setColumns(10);
@@ -172,10 +194,29 @@ public class FrameAgendaContatos extends JFrame {
 		panel.add(textField_email);
 		textField_email.setColumns(10);
 		
-		textField_telefone = new JTextField();
+		textField_telefone = new JFormattedTextField();
+		textField_telefone.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent ev) {
+				String caracteres = "0987654321";
+				if(!caracteres.contains(ev.getKeyChar()+"")){
+					ev.consume();
+				}
+			}
+		});
+		
+		try {
+			MaskFormatter maskTel = new MaskFormatter("(##)####-####");
+			maskTel.install(textField_telefone);
+		} catch (ParseException e2) {
+			e2.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Erro no Telefone");
+		}
+		
 		textField_telefone.setBounds(121, 133, 101, 20);
 		panel.add(textField_telefone);
 		textField_telefone.setColumns(10);
+		
 		
 		JLabel lblRua = new JLabel("Rua");
 		lblRua.setBounds(232, 113, 41, 14);
@@ -191,6 +232,16 @@ public class FrameAgendaContatos extends JFrame {
 		panel.add(lblNumero);
 		
 		textField_numero = new JTextField();
+		textField_numero.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent ev) {//somente aceita numeros
+				String caracteres = "0987654321";
+				if(!caracteres.contains(ev.getKeyChar()+"")){
+					ev.consume();
+				}
+				
+			}
+		});
 		textField_numero.setBounds(121, 186, 46, 20);
 		panel.add(textField_numero);
 		textField_numero.setColumns(10);
@@ -208,10 +259,21 @@ public class FrameAgendaContatos extends JFrame {
 		lblCep.setBounds(614, 171, 50, 14);
 		panel.add(lblCep);
 		
-		textField_cep = new JTextField();
+			MaskFormatter maskCep = null;
+			try {
+				maskCep = new MaskFormatter("#####-###");
+				
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null,"CEP invalido");
+			}
+			
+		textField_cep = new JFormattedTextField();
+		
 		textField_cep.setBounds(614, 186, 146, 20);
 		panel.add(textField_cep);
 		textField_cep.setColumns(10);
+		maskCep.install(textField_cep);
 		
 		JLabel lblCidade = new JLabel("Cidade");
 		lblCidade.setBounds(121, 217, 46, 14);
@@ -277,9 +339,7 @@ public class FrameAgendaContatos extends JFrame {
 		scrollPane.setViewportView(table);
 		panel_1.setLayout(gl_panel_1);
 		
-
-		
-		
+		//Cadastrar contato
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -315,9 +375,6 @@ public class FrameAgendaContatos extends JFrame {
 		        PessoaDAO inserir = new PessoaDAO();
 		        inserir.create(pessoa);
 
-		        dispose();
-			 
-			           
 			}
 		});
 		btnNewButton.setBounds(10, 427, 101, 23);
@@ -327,7 +384,23 @@ public class FrameAgendaContatos extends JFrame {
 		btnExcluir.setBounds(220, 426, 89, 23);
 		panel.add(btnExcluir);
 		
+		//Limpar campos
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textField_nome.setText("");
+				textField_Sobrenome.setText("");
+				textField_email.setText("");
+				textField_telefone.setText("");
+				textField_rua.setText("");
+				textField_numero.setText("");
+				textField_complemento.setText("");
+				textField_cep.setText("");
+				textField_cidade.setText("");
+				textField_pais.setText("");
+				
+			}
+		});
 		btnLimpar.setBounds(570, 426, 95, 23);
 		panel.add(btnLimpar);
 		
@@ -335,7 +408,44 @@ public class FrameAgendaContatos extends JFrame {
 		btnBuscar.setBounds(121, 426, 89, 23);
 		panel.add(btnBuscar);
 		
+		//Alterar
 		JButton btnAlterar = new JButton("Alterar");
+		btnAlterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String nome = textField_nome.getText();
+				String sobrenome = textField_Sobrenome.getText();
+				SexoType sexo =  (SexoType) comboBox_sexo.getSelectedItem();
+				String email = textField_email.getText();
+				String telefone = textField_telefone.getText();
+				String rua = textField_rua.getText();
+				int numero = Integer.parseInt(textField_numero.getText());
+				String complemento = textField_complemento.getText();
+				String cep = textField_cep.getText();
+				String cidade = textField_cidade.getText();
+				EstadoType estado = (EstadoType) comboBox_estado.getSelectedItem();
+				String pais = textField_pais.getText();
+		        
+		        Pessoa pessoa = new Pessoa();
+		        
+		        pessoa.setNome(nome);
+		        pessoa.setSobrenome(sobrenome);
+		        pessoa.setSexo(sexo);
+		        pessoa.setEmail(email);
+		        pessoa.setTelefone(telefone);
+		        pessoa.setRua(rua);
+		        pessoa.setNumero(numero);
+		        pessoa.setComplemento(complemento);
+		        pessoa.setCep(cep);
+		        pessoa.setCidade(cidade);
+		        pessoa.setEstado(estado);
+		        pessoa.setPais(pais);
+				
+				PessoaDAO alterar = new PessoaDAO();
+				alterar.update(pessoa);
+				
+			}
+		});
 		btnAlterar.setBounds(319, 426, 89, 23);
 		panel.add(btnAlterar);
 		

@@ -52,8 +52,6 @@ public class Pessoa {
 		this.estado = estado;
 		this.pais = pais;
 	}
-	
-	
 
 
 
