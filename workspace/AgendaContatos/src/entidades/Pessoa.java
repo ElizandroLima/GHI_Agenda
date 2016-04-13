@@ -5,7 +5,7 @@ public class Pessoa {
 	private int id_pes;
 	private String nome;
 	private String sobrenome;
-	private String sexo;
+	private SexoType sexo;
 	private String telefone;
 	private String email;
 	private String rua;
@@ -13,7 +13,7 @@ public class Pessoa {
 	private String complemento;
 	private String cep;
 	private String cidade;
-	private String estado;
+	private EstadoType estado;
 	private String pais;
 
 	public Pessoa() {
@@ -35,8 +35,8 @@ public class Pessoa {
 	 * @param estado
 	 * @param pais
 	 */
-	public Pessoa(String nome, String sobrenome, String sexo, String telefone, String email, String rua,
-			int numero, String complemento, String cep, String cidade, String estado, String pais) {
+	public Pessoa(String nome, String sobrenome, SexoType sexo, String telefone, String email, String rua,
+			int numero, String complemento, String cep, String cidade, EstadoType estado, String pais) {
 		super();
 		
 		this.nome = nome;
@@ -105,7 +105,7 @@ public class Pessoa {
 	/**
 	 * @return the sexo
 	 */
-	public String getSexo() {
+	public SexoType getSexo() {
 		return sexo;
 	}
 
@@ -113,7 +113,7 @@ public class Pessoa {
 	 * @param sexo
 	 *            the sexo to set
 	 */
-	public void setSexo(String sexo) {
+	public void setSexo(SexoType sexo) {
 		this.sexo = sexo;
 	}
 
@@ -195,7 +195,7 @@ public class Pessoa {
 	/**
 	 * @return the estado
 	 */
-	public String getEstado() {
+	public EstadoType getEstado() {
 		return estado;
 	}
 
@@ -203,7 +203,7 @@ public class Pessoa {
 	 * @param estado
 	 *            the estado to set
 	 */
-	public void setEstado(String estado) {
+	public void setEstado(EstadoType estado) {
 		this.estado = estado;
 	}
 

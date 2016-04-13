@@ -1,0 +1,34 @@
+package entidades;
+
+import java.util.ArrayList;
+
+import javax.swing.table.AbstractTableModel;
+
+public class ModeloTabela extends AbstractTableModel {
+
+	private ArrayList linha;
+	private String colunas;
+
+	public ModeloTabela(ArrayList linha, String colunas) {
+		super();
+		this.linha = linha;
+		this.colunas = colunas;
+	}
+
+	public ArrayList getLinha() {
+		return linha;
+	}
+
+	public void setLinha(ArrayList linha) {
+		this.linha = linha;
+	}
+
+	public String getColunas() {
+		return colunas;
+	}
+
+	public void setColunas(String colunas) {
+		this.colunas = colunas;
+	}
+
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
-	<item value="C:\Users\santos.elizandro\Downloads\mysql-connector-java-5.1.38\mysql-connector-java-5.1.38" key="org.eclipse.jdt.ui.lastextjar"/>
+	<item value="E:\projetos\mysql-connector-java-5.1.38\mysql-connector-java-5.1.38" key="org.eclipse.jdt.ui.lastextjar"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
 		<item value="false" key="renameSubpackages"/>
 		<item value="false" key="updateQualifiedNames"/>
@@ -27,14 +27,14 @@
 		<item value="8" key="DIALOG_Y_ORIGIN"/>
 	</section>
 	<section name="org.eclipse.jdt.internal.ui.dialogs.FilteredTypesSelectionDialog">
-		<item value="true" key="ShowStatusLine"/>
+		<item value="false" key="ShowStatusLine"/>
 		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History/&gt;" key="History"/>
 		<section name="DialogBoundsSettings">
 			<item value="600" key="DIALOG_WIDTH"/>
 			<item value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 			<item value="500" key="DIALOG_HEIGHT"/>
-			<item value="391" key="DIALOG_X_ORIGIN"/>
-			<item value="39" key="DIALOG_Y_ORIGIN"/>
+			<item value="423" key="DIALOG_X_ORIGIN"/>
+			<item value="151" key="DIALOG_Y_ORIGIN"/>
 		</section>
 	</section>
 	<section name="NewClassWizardPage">
@@ -97,6 +97,12 @@
 		<item value="false" key="SkipNull"/>
 		<item value="false" key="FinalModifier"/>
 		<item value="10" key="LimitValue"/>
+	</section>
+	<section name="org.eclipse.jdt.internal.ui.dialogs.PackageSelectionDialog">
+		<item value="484" key="x"/>
+		<item value="398" key="width"/>
+		<item value="0" key="y"/>
+		<item value="438" key="height"/>
 	</section>
 	<section name="RenameInformationPopup">
 	</section>

@@ -1,41 +1,40 @@
 package view;
 
+import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.Image;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.io.File;
+import javax.swing.table.DefaultTableModel;
 
 import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 import conexao.Conexao;
+import dao.PessoaDAO;
+import entidades.EstadoType;
 import entidades.Pessoa;
-
-import java.awt.Component;
-import java.awt.Font;
-
-import javax.swing.JTable;
-import javax.swing.border.LineBorder;
-
-import java.awt.Color;
-
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.SystemColor;
-
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
+import entidades.SexoType;
 
 public class FrameAgendaContatos extends JFrame {
 
@@ -54,7 +53,9 @@ public class FrameAgendaContatos extends JFrame {
 	private JTextField textField_cep;
 	private JTextField textField_cidade;
 	private JTextField textField_pais;
-	private JTable table_contatos;
+	private JComboBox<SexoType> comboBox_sexo;
+	private JComboBox<Object> comboBox_estado;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -234,43 +235,87 @@ public class FrameAgendaContatos extends JFrame {
 		panel.add(textField_pais);
 		textField_pais.setColumns(10);
 		
+		comboBox_sexo = new JComboBox<SexoType>();
+		comboBox_sexo.setModel(new DefaultComboBoxModel<SexoType>(SexoType.values()));
+		comboBox_sexo.setBounds(121, 82, 86, 20);
+		panel.add(comboBox_sexo);
+		
+		comboBox_estado = new JComboBox<>();
+		comboBox_estado.setModel(new DefaultComboBoxModel<Object>(EstadoType.values()));
+		comboBox_estado.setBounds(429, 235, 152, 20);
+		panel.add(comboBox_estado);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 272, 750, 145);
 		panel.add(panel_1);
-		panel_1.setLayout(null);
 		
-		table_contatos = new JTable();
-		table_contatos.setModel(new DefaultTableModel(
+		JScrollPane scrollPane = new JScrollPane();
+		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		gl_panel_1.setHorizontalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+					.addContainerGap())
+		);
+		gl_panel_1.setVerticalGroup(
+			gl_panel_1.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		
+		DefaultTableModel modelo = new DefaultTableModel();
+		JTable table = new JTable(modelo);
+		
+		table.setModel(new DefaultTableModel(
 			new Object[][] {
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
-				{null, null, null, null, null, null, null, null, null, null, null, null},
 			},
 			new String[] {
-				"New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column", "New column"
+				"Nome", "sobrenome", "sexo", "telefone", "email", "rua", "numero", "complemento", "cep", "cidade", "estado", "pais"
 			}
 		));
-		table_contatos.setColumnSelectionAllowed(true);
-		table_contatos.setBorder(new LineBorder(new Color(0, 0, 0)));
-		table_contatos.setBounds(10, 115, 550, -103);
-		panel_1.add(table_contatos);
+		scrollPane.setViewportView(table);
+		panel_1.setLayout(gl_panel_1);
+		
+
+		
 		
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int iCodigo = Integer.parseInt(txtCodigo.getText());
-		        int iNumero = Integer.parseInt(txtNumero.getText());
-		        String sDescricao = txtDescricao.getText();
-		        double dValor = Double.parseDouble(txtValor.getText());
+		       
+				String nome = textField_nome.getText();
+				String sobrenome = textField_Sobrenome.getText();
+				SexoType sexo =  (SexoType) comboBox_sexo.getSelectedItem();
+				String email = textField_email.getText();
+				String telefone = textField_telefone.getText();
+				String rua = textField_rua.getText();
+				int numero = Integer.parseInt(textField_numero.getText());
+				String complemento = textField_complemento.getText();
+				String cep = textField_cep.getText();
+				String cidade = textField_cidade.getText();
+				EstadoType estado = (EstadoType) comboBox_estado.getSelectedItem();
+				String pais = textField_pais.getText();
 		        
 		        Pessoa pessoa = new Pessoa();
-		        pessoa.setCodigo();
+		        
+		        pessoa.setNome(nome);
+		        pessoa.setSobrenome(sobrenome);
+		        pessoa.setSexo(sexo);
+		        pessoa.setEmail(email);
+		        pessoa.setTelefone(telefone);
+		        pessoa.setRua(rua);
+		        pessoa.setNumero(numero);
+		        pessoa.setComplemento(complemento);
+		        pessoa.setCep(cep);
+		        pessoa.setCidade(cidade);
+		        pessoa.setEstado(estado);
+		        pessoa.setPais(pais);
+		        
+		        PessoaDAO inserir = new PessoaDAO();
+		        inserir.create(pessoa);
 
-		 
-		        BancoDados.addAposento(aposento);
-		        Aposentos.atualizaTabela();
-		        this.dispose();
+		        dispose();
 			 
 			           
 			}
@@ -294,14 +339,8 @@ public class FrameAgendaContatos extends JFrame {
 		btnAlterar.setBounds(319, 426, 89, 23);
 		panel.add(btnAlterar);
 		
-		JComboBox comboBox_sexo = new JComboBox();
-		comboBox_sexo.setBounds(121, 82, 86, 20);
-		panel.add(comboBox_sexo);
-		
-		JComboBox comboBox_estado = new JComboBox();
-		comboBox_estado.setModel(new DefaultComboBoxModel(new String[] {"...", "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC", "SP", "SE", "TO"}));
-		comboBox_estado.setBounds(429, 235, 152, 20);
-		panel.add(comboBox_estado);
+
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, panel, lbImagem, lblNome, textField_nome, lblSobrenome, textField_Sobrenome, lblSexo, btnCarregarImagem, btnSair}));
 	}
+	
 }

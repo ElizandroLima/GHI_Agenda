@@ -1,0 +1,27 @@
+package view;
+
+public enum SexoType {
+	M("Masculino"), F("Feminino");
+
+	private String descricao;
+
+	private SexoType(String descricao) {
+		this.descricao = descricao;
+	}
+
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+
+	/**
+	 * @param descricao
+	 *            the descricao to set
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+}
