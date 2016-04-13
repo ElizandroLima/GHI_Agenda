@@ -1,11 +1,13 @@
 package dao;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 import conexao.Conexao;
 import entidades.Pessoa;
@@ -76,11 +78,11 @@ public class PessoaDAO implements Obrigatorio<Pessoa> {
 
 		try {
 			ps = con.getCon().prepareStatement(SQL_UPDATE);
-			
+
 			ps.setString(1, ent.getNome());
 			ps.setString(2, ent.getSobrenome());
 			ps.setString(3, ent.getSexo().getDescricao());
-			ps.setString(4,ent.getTelefone());
+			ps.setString(4, ent.getTelefone());
 			ps.setString(5, ent.getEmail());
 			ps.setString(6, ent.getRua());
 			ps.setInt(7, ent.getNumero());
@@ -89,19 +91,19 @@ public class PessoaDAO implements Obrigatorio<Pessoa> {
 			ps.setString(10, ent.getCidade());
 			ps.setString(11, ent.getEstado().getDescEstado());
 			ps.setString(12, ent.getPais());
-			
+
 			ps.execute();
-			JOptionPane.showMessageDialog(null, "Alteração concluída com sucesso!");
+			JOptionPane.showMessageDialog(null,
+					"Alteração concluída com sucesso!");
 			con.fecharconexao();
 			return true;
-			
+
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Alteração não aceita");
 			e.printStackTrace();
 		} finally {
 			con.fecharconexao();
 		}
-		
 
 		return false;
 	}
@@ -113,23 +115,16 @@ public class PessoaDAO implements Obrigatorio<Pessoa> {
 
 		try {
 			ps = con.getCon().prepareStatement(SQL_SELECT);
-			
-			
-			
-			
-			
-			
-			
+
 			ps.executeQuery();
 			con.fecharconexao();
-			
+
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
 			e.printStackTrace();
 		} finally {
 			con.fecharconexao();
 		}
-		
 
 		return null;
 	}
@@ -142,16 +137,29 @@ public class PessoaDAO implements Obrigatorio<Pessoa> {
 
 	public void preencherTabela(String sql) {
 
-		ArrayList<Pessoa> dados = new ArrayList<>();
-		String[] colunas = new String[] { "nome", "sobrenome", "sexo", "telefone", "email", "rua", "numero",
-				"complemento", "cep", "cidade", "estado", "pais" };
-
 		Conexao con = Conexao.saberEstado();
-
-		con.
-
-				fecharconexao();
+			
+		try {
+			PreparedStatement ps = null;
+			ps.executeQuery("select ps_nome, ps_sobrenome, ps_sexo, ps_telefone,ps_email, ps_rua, ps_numero, ps_complemento, ps_cep, ps_cidade, ps_estado, ps_pais from pessoa");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			DefaultTableModel modelo = new DefaultTableModel();
+			
+			while (rs.next()) {
+				//pega os valores do bd para popular tabela
+				modelo.addRow(new String[] {rs.getString("id"), 
+						  rs.getString("descricao"), rs.getString("data"), rs.getString("servico") });
+			}
+				
+			
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		
+		con.fecharconexao();
 
 	}
-
 }
