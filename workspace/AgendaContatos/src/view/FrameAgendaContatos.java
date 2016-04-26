@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
@@ -38,6 +39,7 @@ import dao.PessoaDAO;
 import entidades.EstadoType;
 import entidades.Pessoa;
 import entidades.SexoType;
+import java.awt.FlowLayout;
 
 public class FrameAgendaContatos extends JFrame {
 
@@ -58,7 +60,9 @@ public class FrameAgendaContatos extends JFrame {
 	private JTextField textField_pais;
 	private JComboBox<SexoType> comboBox_sexo;
 	private JComboBox<Object> comboBox_estado;
-	private JTable table;
+	private JTable table_1;
+	private DefaultTableModel tablePessoa;
+	private JTextField textField_id;
 
 	/**
 	 * Launch the application.
@@ -78,8 +82,9 @@ public class FrameAgendaContatos extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws Exception 
 	 */
-	public FrameAgendaContatos() {
+	public FrameAgendaContatos() throws Exception {
 		setTitle("Agenda de Contatos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 790, 500);
@@ -96,7 +101,7 @@ public class FrameAgendaContatos extends JFrame {
 		
 		JLabel lbImagem = new JLabel("foto");
 		lbImagem.setHorizontalAlignment(SwingConstants.CENTER);
-		lbImagem.setBounds(10, 11, 101, 145);
+		lbImagem.setBounds(10, 78, 101, 145);
 		panel.add(lbImagem);
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -169,7 +174,7 @@ public class FrameAgendaContatos extends JFrame {
 				
 			}
 		});
-		btnCarregarImagem.setBounds(10, 167, 86, 23);
+		btnCarregarImagem.setBounds(10, 234, 86, 23);
 		panel.add(btnCarregarImagem);
 		
 		JButton btnSair = new JButton("Sair");
@@ -307,37 +312,7 @@ public class FrameAgendaContatos extends JFrame {
 		comboBox_estado.setBounds(429, 235, 152, 20);
 		panel.add(comboBox_estado);
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 272, 750, 145);
-		panel.add(panel_1);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
-					.addContainerGap())
-		);
-		gl_panel_1.setVerticalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 147, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
-		
-		DefaultTableModel modelo = new DefaultTableModel();
-		JTable table = new JTable(modelo);
-		
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"Nome", "sobrenome", "sexo", "telefone", "email", "rua", "numero", "complemento", "cep", "cidade", "estado", "pais"
-			}
-		));
-		scrollPane.setViewportView(table);
-		panel_1.setLayout(gl_panel_1);
+
 		
 		//Cadastrar contato
 		JButton btnNewButton = new JButton("Cadastrar");
@@ -388,6 +363,7 @@ public class FrameAgendaContatos extends JFrame {
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				textField_id.setText("");
 				textField_nome.setText("");
 				textField_Sobrenome.setText("");
 				textField_email.setText("");
@@ -405,6 +381,15 @@ public class FrameAgendaContatos extends JFrame {
 		panel.add(btnLimpar);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			   
+				String busca = textField_nome.getText();
+				
+				Pessoa pes = new PessoaDAO().selecionar(busca);
+				
+			}
+		});
 		btnBuscar.setBounds(121, 426, 89, 23);
 		panel.add(btnBuscar);
 		
@@ -441,16 +426,44 @@ public class FrameAgendaContatos extends JFrame {
 		        pessoa.setEstado(estado);
 		        pessoa.setPais(pais);
 				
-				PessoaDAO alterar = new PessoaDAO();
-				alterar.update(pessoa);
+				new PessoaDAO().update(pessoa);
+				
 				
 			}
 		});
 		btnAlterar.setBounds(319, 426, 89, 23);
 		panel.add(btnAlterar);
 		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(10, 264, 754, 151);
+		panel.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 11, 734, 129);
+		panel_1.add(scrollPane);
+		
+		tablePessoa = new PessoaDAO().metodo();
+		table_1 = new JTable(tablePessoa);
+		
+		
+		scrollPane.setViewportView(table_1);
+		
+		textField_id = new JTextField();
+		textField_id.setFont(new Font("Arial Narrow", Font.BOLD, 18));
+		textField_id.setBounds(10, 11, 101, 37);
+		panel.add(textField_id);
+		textField_id.setColumns(10);
+		
+		JLabel lblIdentificador = new JLabel("Identificador");
+		lblIdentificador.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblIdentificador.setHorizontalAlignment(SwingConstants.CENTER);
+		lblIdentificador.setBounds(10, 53, 101, 14);
+		panel.add(lblIdentificador);
+		
+		//getContentPane().add(table_1);
+		
 
 		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{contentPane, panel, lbImagem, lblNome, textField_nome, lblSobrenome, textField_Sobrenome, lblSexo, btnCarregarImagem, btnSair}));
 	}
-	
 }

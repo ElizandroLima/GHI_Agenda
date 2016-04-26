@@ -15,6 +15,7 @@ public class Pessoa {
 	private String cidade;
 	private EstadoType estado;
 	private String pais;
+	private String foto;
 
 	public Pessoa() {
 
@@ -53,6 +54,40 @@ public class Pessoa {
 		this.pais = pais;
 	}
 
+
+
+	/**
+	 * @param id_pes
+	 * @param nome
+	 * @param sobrenome
+	 * @param sexo
+	 * @param telefone
+	 * @param email
+	 * @param rua
+	 * @param numero
+	 * @param complemento
+	 * @param cep
+	 * @param cidade
+	 * @param estado
+	 * @param pais
+	 */
+	public Pessoa(int id_pes, String nome, String sobrenome, SexoType sexo, String telefone, String email, String rua,
+			int numero, String complemento, String cep, String cidade, EstadoType estado, String pais) {
+		super();
+		this.id_pes = id_pes;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.sexo = sexo;
+		this.telefone = telefone;
+		this.email = email;
+		this.rua = rua;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.cep = cep;
+		this.cidade = cidade;
+		this.estado = estado;
+		this.pais = pais;
+	}
 
 
 	/**
@@ -114,6 +149,36 @@ public class Pessoa {
 	public void setSexo(SexoType sexo) {
 		this.sexo = sexo;
 	}
+
+	/**
+	 * @param id_pes
+	 * @param nome
+	 * @param sobrenome
+	 * @param telefone
+	 * @param email
+	 * @param rua
+	 * @param numero
+	 * @param complemento
+	 * @param cep
+	 * @param cidade
+	 * @param pais
+	 */
+	public Pessoa(int id_pes, String nome, String sobrenome, String telefone, String email, String rua, int numero,
+			String complemento, String cep, String cidade, String pais) {
+		super();
+		this.id_pes = id_pes;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.telefone = telefone;
+		this.email = email;
+		this.rua = rua;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.cep = cep;
+		this.cidade = cidade;
+		this.pais = pais;
+	}
+
 
 	/**
 	 * @return the rua
@@ -385,6 +450,16 @@ public class Pessoa {
 		} else if (!telefone.equals(other.telefone))
 			return false;
 		return true;
+	}
+
+
+	public String getFoto() {
+		return foto;
+	}
+
+
+	public void setFoto(String foto) {
+		this.foto = foto;
 	}
 
 }

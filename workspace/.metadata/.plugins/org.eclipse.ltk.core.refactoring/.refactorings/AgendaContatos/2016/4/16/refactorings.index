@@ -10,3 +10,5 @@
 1460517463908	Infer generic type arguments
 1460560981203	Delete element
 1460560993508	Delete element
+1460595615895	Convert local variable 'tablePessoa' to field
+1460671869465	Convert local variable 'pessoa' to field

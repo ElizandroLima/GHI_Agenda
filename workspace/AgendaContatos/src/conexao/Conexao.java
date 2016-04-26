@@ -17,22 +17,25 @@ public class Conexao {
 
 	public static Conexao instance; // Singleton
 	private Connection con;
+	
+	//Dados para a conexão com o banco 
+	private static final String USUARIO = "root"; 
+	private static final String SENHA = "root"; 
+	private static final String DATABASE = "sisfac"; 
+	private static final String DRIVER_CONEXAO = "com.mysql.jdbc.Driver"; 
+	private static final String URL_CONEXAO = "jdbc:mysql://localhost:3306/sisfac";
 
 	/**
 	 *@author Elima
 	 * construtor da classe que gera conexao
 	 */
 	private Conexao() {
-		String url = "jdbc:mysql://localhost:3306/sisfac";
-		String driver = "com.mysql.jdbc.Driver";
-		String usuario = "root";
-		String senha = "root";
 
 		String message = "Driver não encontrado!";
 		String message2 = "Login ou senha da DB incorretos!";
 
 		try {
-			Class.forName(driver);// driver
+			Class.forName(DRIVER_CONEXAO);// driver
 			System.out.println("Driver, ok!");
 
 		} catch (ClassNotFoundException e) {
@@ -41,7 +44,7 @@ public class Conexao {
 		}
 		
 		try {
-			con = DriverManager.getConnection(url, usuario, senha);// url
+			con = DriverManager.getConnection(URL_CONEXAO, USUARIO, SENHA);// url
 			System.out.println("Connection, ok!");
 			
 		} catch (SQLException e) {

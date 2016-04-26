@@ -12,7 +12,6 @@
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
 <fullyQualifiedTypeName name="conexao.DaoHelper"/>
 <fullyQualifiedTypeName name="java.lang.Integer"/>
-<fullyQualifiedTypeName name="dao.PessoaDAO"/>
 <fullyQualifiedTypeName name="view.SexoType"/>
 <fullyQualifiedTypeName name="entidades.EstadoType"/>
 <fullyQualifiedTypeName name="javax.swing.DefaultComboBoxModel"/>
@@ -26,8 +25,10 @@
 <fullyQualifiedTypeName name="javax.swing.JFormattedTextField"/>
 <fullyQualifiedTypeName name="javax.swing.text.MaskFormatter"/>
 <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
-<fullyQualifiedTypeName name="entidades.Pessoa"/>
 <fullyQualifiedTypeName name="java.awt.TextField"/>
-<fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="javax.swing.table.DefaultTableModel"/>
+<fullyQualifiedTypeName name="java.sql.ResultSet"/>
+<fullyQualifiedTypeName name="java.awt.Container"/>
+<fullyQualifiedTypeName name="dao.PessoaDAO"/>
+<fullyQualifiedTypeName name="entidades.Pessoa"/>
 </qualifiedTypeNameHistroy>
