@@ -1,0 +1,260 @@
+package dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+import conexao.Conexao;
+import entidades.Pessoa;
+import interfaces.Obrigatorio;
+
+/**
+ * @author Elima
+ *
+ */
+public class PessoaDAO implements Obrigatorio<Pessoa> {
+
+	private static final String SQL_INSERT = "INSERT INTO pessoa(ps_nome, ps_sobrenome, ps_sexo, ps_telefone, ps_email, ps_rua, ps_numero, ps_complemento, ps_cep, ps_cidade, ps_estado, ps_pais, ps_path_img) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String SQL_DELETE = "DELETE FROM pessoa WHERE id_pessoa = ?";
+	private static final String SQL_UPDATE = "UPDATE pessoa SET ps_nome=?, ps_sobrenome=?, ps_sexo=?, ps_telefone=?,ps_email=?, ps_rua=?, ps_numero=?, ps_complemento=?, ps_cep=?, ps_cidade=?, ps_estado=?, ps_pais=? WHERE id_pessoa = ?";
+	private static final String SQL_SELECT = "SELECT * FROM pessoa WHERE id_pessoa = ?";
+	private static final String SQL_SELECTALL = "SELECT * FROM pessoa";
+	private static final String SQL_PREENCHETABELA = "SELECT * FROM pessoa";
+
+	// aplicando singletos
+	private static final Conexao con = Conexao.saberEstado();
+	private Pessoa pessoa;
+
+	@Override
+	public boolean create(Pessoa ent) {
+		PreparedStatement ps;
+
+		try {
+			ps = con.getCon().prepareStatement(SQL_INSERT);
+			ps.setString(1, ent.getNome());
+			ps.setString(2, ent.getSobrenome());
+			ps.setString(3, ent.getSexo().getDescricao());
+			ps.setString(4, ent.getTelefone());
+			ps.setString(5, ent.getEmail());
+			ps.setString(6, ent.getRua());
+			ps.setInt(7, ent.getNumero());
+			ps.setString(8, ent.getComplemento());
+			ps.setString(9, ent.getCep());
+			ps.setString(10, ent.getCidade());
+			ps.setString(11, ent.getEstado().getDescEstado());
+			ps.setString(12, ent.getPais());
+			ps.setString(13, ent.getFoto());
+
+			if (ps.executeUpdate() > 0) {
+				System.out.println("Contato inserido!");
+				return true;
+			}
+			con.fecharconexao();
+
+		} catch (SQLException e) {
+			System.out.println("Erro ao executar insert!");
+			e.printStackTrace();
+		} finally {
+			con.fecharconexao();
+		}
+
+		return false;
+
+	}
+
+	@Override
+	public Pessoa delete(String nome) {
+		PreparedStatement ps;
+
+		try {
+
+			String comando = "delete from pessoa where ps_nome like ('%" + nome + "%')";
+
+			System.out.println(nome);
+
+			ps = con.getCon().prepareStatement(comando);
+			ps.executeUpdate(comando);
+
+		} catch (SQLException e) {
+			System.out.println("ERRO ao selecionar cliente...");
+			e.printStackTrace();
+		}
+
+		return pessoa;
+	}
+
+	@Override
+	public boolean update(Pessoa ent) {
+		PreparedStatement ps;
+
+		try {
+			ps = con.getCon().prepareStatement(SQL_UPDATE);
+
+			ps.setString(1, ent.getNome());
+			ps.setString(2, ent.getSobrenome());
+			ps.setString(3, ent.getSexo().getDescricao());
+			ps.setString(4, ent.getTelefone());
+			ps.setString(5, ent.getEmail());
+			ps.setString(6, ent.getRua());
+			ps.setInt(7, ent.getNumero());
+			ps.setString(8, ent.getComplemento());
+			ps.setString(9, ent.getCep());
+			ps.setString(10, ent.getCidade());
+			ps.setString(11, ent.getEstado().getDescEstado());
+			ps.setString(12, ent.getPais());
+			ps.setInt(13, ent.getId_pes());
+
+			if (ps.executeUpdate() > 0) {
+
+				JOptionPane.showMessageDialog(null, "Alteração concluída com sucesso!");
+				con.fecharconexao();
+				return true;
+
+			}
+
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Alteração não aceita");
+			e.printStackTrace();
+		} finally {
+			con.fecharconexao();
+		}
+
+		return false;
+	}
+
+	// @Override
+	// public Pessoa select(Object key) {
+	//
+	// PreparedStatement ps;
+	// ResultSet rs;
+	// Pessoa pessoa;
+	//
+	// try {
+	// ps = con.getCon().prepareStatement(SQL_SELECT);
+	// ps.setString(1, key.toString());
+	// rs = ps.executeQuery();
+	// while(rs.next()){
+	// pessoa = new Pessoa(rs.getInt(1), rs.getString(2), rs.getString(3), null,
+	// rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7),
+	// rs.getString(8), rs.getString(9), rs.getString(10), null,
+	// rs.getString(11));
+	// //pessoa = new Pessoa();
+	//
+	// return pessoa;
+	//
+	//
+	// }
+	//
+	// con.fecharconexao();
+	//
+	// } catch (SQLException e) {
+	// JOptionPane.showMessageDialog(null, "Usuário não encontrado!");
+	// e.printStackTrace();
+	// } finally {
+	// con.fecharconexao();
+	// }
+	//
+	// return null;
+	// }
+
+	public Pessoa selecionar(String nome) {
+
+		PreparedStatement ps;
+		ResultSet rs;
+
+		try {
+
+			String comando = "select * from pessoa where ps_nome like ('%" + nome + "%')";
+
+			System.out.println(nome);
+
+			ps = con.getCon().prepareStatement(comando);
+			rs = ps.executeQuery(comando);
+
+			while (rs.next()) {
+
+				Pessoa psa = new Pessoa();
+
+				psa.setId_pes(rs.getInt("id_pessoa"));
+				psa.setNome(rs.getString("ps_nome"));
+				psa.setSobrenome(rs.getString("ps_sobrenome"));
+				// pessoa.setSexo.valueOf(rs.getString("ps_sexo"));
+				psa.setTelefone(rs.getString("ps_telefone"));
+				psa.setEmail(rs.getString("ps_email"));
+				psa.setRua(rs.getString("ps_rua"));
+				psa.setNumero(rs.getInt("ps_numero"));
+				// pessoa.setComplemento(rs.getString("ps_comlemento"));
+				psa.setCep(rs.getString("ps_cep"));
+				psa.setCidade(rs.getString("ps_cidade"));
+				// pessoa.setEstado().valueOf(rs.getString("ps_estado"));
+				psa.setPais(rs.getString("ps_pais"));
+
+			}
+
+		} catch (SQLException e) {
+			System.out.println("ERRO ao selecionar cliente...");
+			e.printStackTrace();
+		}
+
+		return pessoa;
+
+	}
+
+	@Override
+	public List<Pessoa> selectAll() {
+
+		return null;
+	}
+
+	// **************************************************************************************
+	public DefaultTableModel metodo() throws Exception {
+		DefaultTableModel dtm = new DefaultTableModel() {
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			}
+		};
+		ResultSet rs;
+		PreparedStatement ps = null;
+		Conexao con = Conexao.saberEstado();
+		String sql = "select ps_nome, ps_sobrenome, ps_sexo, ps_telefone, ps_email, ps_rua, ps_numero, ps_complemento, ps_cep, ps_cidade, ps_estado, ps_pais, ps_path_img from pessoa order by ps_nome";
+		ps = con.getCon().prepareStatement(sql);
+		rs = ps.executeQuery();
+		// adiciona as colunas
+		dtm.addColumn("Nome");
+		dtm.addColumn("sobrenome");
+		dtm.addColumn("telefone");
+		dtm.addColumn("cep");
+		dtm.addColumn("cidade");
+		dtm.addColumn("estado");
+		dtm.addColumn("img");
+
+		while (rs.next()) {
+			// pega os valores do bd para popular tabela
+			dtm.addRow(new String[] { rs.getString("ps_nome"), rs.getString("ps_sobrenome"),
+					rs.getString("ps_telefone"), rs.getString("ps_cep"), rs.getString("ps_cidade"),
+					rs.getString("ps_estado"), rs.getString("ps_path_img") });
+		}
+
+		con.fecharconexao();
+		return dtm;
+	}
+
+	@Override
+	public Pessoa select(Object key) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean delete(Object key) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}
